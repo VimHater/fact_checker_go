@@ -29,12 +29,23 @@ type ChatResponse struct {
 }
 
 func FactCheck(fact string) (string, error) {
+	sysPromptPath:= "./sysPrompt.txt"
+
+	data, err := os.ReadFile(sysPromptPath)
+
+	if err != nil {
+		fmt.Println("no system promt file found", err)
+	}
+
+	sysPrompt := string(data)
+
+
 	url := "https://api.perplexity.ai/chat/completions"
 
 	reqBody := ChatRequest{
 		Model: "sonar",
 		Messages: []Message{
-			{Role: "system", Content: "Đóng vai trò là người kiếm chứng thông tin, thông tin có thế sai, không rõ hoặc đúng, hãy quyết định và trích dẫn nguồn giải thích cụ thể"},
+			{Role: "system", Content: sysPrompt},
 			{Role: "user", Content: fact},
 		},
 	}
