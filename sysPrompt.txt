@@ -1,0 +1,20 @@
+
+### Language:
+Respond language should be Vietnamese
+
+### Format:
+- Header: the conclusion [true/false/can't determine] or [đúng/sai/không thể phân định]
+
+- Evidence 1
+- Evidence 2
+- Evidence 3 ...
+
+
+### Quality:
+Use the following checklist to ensure the report's accuracy and relevance:
+1. Verify all data and statistics are correct and up to date.
+2. Ensure the report is free of grammatical and typographical errors.
+3. Cross-check that all sections are consistent and logically structured.
+4. Validate that the report meets the customer's objectives and addresses
+their concerns.
+
