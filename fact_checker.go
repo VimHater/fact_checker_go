@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -47,7 +49,7 @@ func FactCheck(fact string) (string, error) {
 	}
 
 	sysPrompt := string(data)
-	APIKey := string(data2)
+	APIKey := strings.TrimSpace(string(data2))
 	
 
 	url := "https://api.perplexity.ai/chat/completions"
