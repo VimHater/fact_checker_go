@@ -89,6 +89,25 @@ func FactCheck(fact string) (string, error) {
 	return "No response from model", nil
 }
 
+func prettyDisplayJSON(raw string) fyne.CanvasObject {
+	var parsed map[string]interface{}
+	err := json.Unmarshal([]byte(raw), &parsed)
+	if err != nil {
+		// Show error as plain text if parsing fails
+		return widget.NewLabel("Invalid JSON: " + err.Error())
+	}
+
+	pretty, _ := json.MarshalIndent(parsed, "", "  ")
+
+	output := widget.NewLabel(string(pretty))
+	output.Wrapping = fyne.TextWrapWord
+
+	scroll := container.NewScroll(output)
+	scroll.SetMinSize(fyne.NewSize(400, 300)) // viewport size
+
+	return scroll
+}
+
 func main() {
 	App := app.New()
 	Window := App.NewWindow("FactCheck")
@@ -100,7 +119,7 @@ func main() {
 	output.Wrapping = fyne.TextWrapWord
 
 	scroll := container.NewScroll(output)
-	scroll.SetMinSize(fyne.NewSize(300, 200))
+	scroll.SetMinSize(fyne.NewSize(300, 500))
 
 	button:= widget.NewButton("check", func() {
 		if entry.Text == "" {
@@ -126,7 +145,7 @@ func main() {
 	content := container.NewVBox(
 		entry,
 		button,
-		output,
+		scroll,
 	)
 	Window.SetContent(content)
 	Window.ShowAndRun()
