@@ -34,7 +34,7 @@ func FactCheck(fact string) (string, error) {
 	reqBody := ChatRequest{
 		Model: "sonar",
 		Messages: []Message{
-			{Role: "system", Content: "You are a fact-checking assistant. Verify claims and cite evidence if possible."},
+			{Role: "system", Content: "Đóng vai trò là người kiếm chứng thông tin, thông tin có thế sai, không rõ hoặc đúng, hãy quyết định và trích dẫn nguồn giải thích cụ thể"},
 			{Role: "user", Content: fact},
 		},
 	}
