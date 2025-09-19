@@ -1,2 +1,3 @@
-./fact_checker
-./fact_checker.exe
+./fact_checker_go
+./fact_checker_go.exe
+./PLPX_API_KEY.txt

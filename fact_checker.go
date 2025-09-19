@@ -34,13 +34,21 @@ type ChatResponse struct {
 
 func FactCheck(fact string) (string, error) {
 	sysPromptPath := "./sysPrompt.txt"
+	APIKeyPath := "./PLPX_API_KEY.txt" 
 
 	data, err := os.ReadFile(sysPromptPath)
 	if err != nil {
 		fmt.Println("no system promt file found", err)
 	}
+	
+	data2, err := os.ReadFile(APIKeyPath)
+	if err != nil {
+		fmt.Println("no api key file found", err)
+	}
 
 	sysPrompt := string(data)
+	APIKey := string(data2)
+	
 
 	url := "https://api.perplexity.ai/chat/completions"
 
@@ -62,7 +70,7 @@ func FactCheck(fact string) (string, error) {
 		return "", err
 	}
 
-	req.Header.Set("Authorization", "Bearer "+os.Getenv("PPLX_API_KEY"))
+	req.Header.Set("Authorization", "Bearer " + APIKey)
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
