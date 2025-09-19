@@ -7,6 +7,9 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 )
 
 type Message struct {
@@ -87,18 +90,48 @@ func FactCheck(fact string) (string, error) {
 	return "No response from model", nil
 }
 
+// func main() {
+// 	args := os.Args[1:]
+// 	if len(args) < 1 {
+// 		fmt.Println("Usage: need arguments")
+// 		return	
+// 	}
+//
+// 	result, err := FactCheck(args[0])
+// 	if err != nil {
+// 		fmt.Println("Error:", err)
+// 		return
+// 	}
+// 	fmt.Println("Fact-check result:\n", result)
+// }
 func main() {
-	args := os.Args[1:]
-	if len(args) < 1 {
-		fmt.Println("Usage: need arguments")
-		return	
-	}
+	App := app.New()
+	Window := App.NewWindow("FactCheck")
+	
+	entry := widget.NewEntry()
+	entry.SetPlaceHolder("Enter fact")
 
-	result, err := FactCheck(args[0])
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
-	fmt.Println("Fact-check result:\n", result)
+	output := widget.NewLabel("")
+
+	button := widget.NewButton("check", func() {
+		if entry.Text == "" {
+			output.SetText("no string found")
+			return
+		}
+		result , err := FactCheck(entry.Text)
+		if err != nil {
+			output.SetText("Bad request")
+			return
+		}
+		output.SetText(result)
+	})
+
+	content := container.NewVBox(
+		entry,
+		button,
+		output,
+
+	)
+	Window.SetContent(content)
+	Window.ShowAndRun()
 }
-
