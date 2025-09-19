@@ -12,6 +12,7 @@ Instructions:
 {
   "verdict": "Đúng | Sai | Phiến diện | Không xác định được",
   "explanation": "Short, clear reasoning behind the verdict",
-  "sources": ["source1 summary", "https://source1.com", "source2 summary", "https://source2.com",...]
+  "sources": ["source1 summary","https://source1.com", "source2 summary", "https://source2.com",...]
+  "sources format" : "first line is source summary, second line is link or reference, add bullet point before each summary"
 }
 
